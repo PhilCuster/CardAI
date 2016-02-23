@@ -65,17 +65,21 @@ public class Tournament {
 	System.out.println("Trump = " + trump + "\n" + c1.name + ": " + hand1 + "\n" + c2.name + ": " + hand2);
 	while(!hand2.isEmpty()) {  // play hand
 	    Card card1 = c1.player.playFirstCard(hand1, playedCards, trump, tricks1, tricks2);
-	    if(hand1.indexOf(card1) == -1) { tricks1 = 0; tricks2 = 7; break; } // forfeit
+	    if(hand1.indexOf(card1) == -1) { tricks1 = 0; tricks2 = 7; System.out.println(" forfeits!!!"); break; } // forfeit
 	    hand1.remove(card1);
 	    playedCards.add(card1);
 	    Card card2 = c2.player.playSecondCard(hand2, playedCards, trump, tricks1, tricks2);
-	    if(hand2.indexOf(card2) == -1) { tricks1 = 7; tricks2 = 0; break; } // forfeit
+	    if(hand2.indexOf(card2) == -1) {
+            tricks1 = 7; tricks2 = 0;
+            System.out.println(" forfeits!!!");
+            break;
+        } // forfeit
 	    boolean canFollow = false;
 	    for(Card c : hand2)
 		if(c.suit == card1.suit)
 		    canFollow = true;
 	    if(canFollow && card2.suit != card1.suit && card2.suit != trump.suit) 
-		{ tricks1 = 7; tricks2 = 0; break; } // forfeit
+		{ tricks1 = 7; tricks2 = 0; System.out.println(" forfeits!!!"); break; } // forfeit
 	    hand2.remove(card2);
 	    playedCards.add(card2);
 	    if(card1.greater(card2, trump))
